@@ -18,6 +18,7 @@
 <meta name="twitter:description" content="Get instant meal ideas powered by AI. Tell CraveItOut what's in your fridge and your mood — it'll handle the rest.">
 <meta name="twitter:image" content="https://craveitout.vercel.app/og-preview.png">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script defer src="/_vercel/insights/script.js"></script>
 <style>
 :root{
 --primary:#FF3008;--secondary:#FF8C00;--accent:#FFD600;
@@ -495,7 +496,7 @@ FOOD_TYPES.forEach(t=>{const p=document.createElement('button');p.className='foo
 
 const ingInput=document.getElementById('ingInput');
 const chipsWrap=document.getElementById('chipsWrap');
-function addIng(val){const v=val.trim().slice(0,50);if(!v||S.ings.includes(v)||S.ings.length>=20)return;S.ings.push(v);const chip=document.createElement('span');chip.className='chip';chip.innerHTML=`${v}<button class="chip-x" aria-label="Remove ${v}">×</button>`;chip.querySelector('.chip-x').addEventListener('click',()=>{S.ings=S.ings.filter(i=>i!==v);chip.remove();updateIngCount();});chipsWrap.appendChild(chip);updateIngCount();}
+function addIng(val){const v=val.trim().slice(0,50);if(!v||S.ings.includes(v)||S.ings.length>=20)return;S.ings.push(v);const chip=document.createElement('span');chip.className='chip';chip.innerHTML=`${escapeHtml(v)}<button class="chip-x" aria-label="Remove ${escapeHtml(v)}">×</button>`;chip.querySelector('.chip-x').addEventListener('click',()=>{S.ings=S.ings.filter(i=>i!==v);chip.remove();updateIngCount();});chipsWrap.appendChild(chip);updateIngCount();}
 function updateIngCount(){document.getElementById('ingCount').textContent=S.ings.length?`${S.ings.length} ingredient${S.ings.length>1?'s':''} added ✓`:''}
 document.getElementById('addIngBtn').addEventListener('click',()=>{addIng(ingInput.value);ingInput.value='';ingInput.focus();});
 ingInput.addEventListener('keydown',e=>{if(e.key==='Enter'){addIng(ingInput.value);ingInput.value='';}});
@@ -522,17 +523,21 @@ async function callClaudeAPI(systemPrompt, userPrompt){
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({ systemPrompt, userPrompt })
   });
-  if (!response.ok) throw new Error('API error');
+  if (!response.ok) throw new Error(`API error: ${response.status}`);
   const data = await response.json();
   const clean = data.text.replace(/```json|```/g, '').trim();
-  return JSON.parse(clean);
+  try {
+    return JSON.parse(clean);
+  } catch {
+    throw new Error('Invalid response from API');
+  }
 }
 
 async function fakeApiCall(mood){
   const sys = "You are a creative chef assistant. Respond in raw JSON only. No markdown, no explanation, no code blocks.";
   const ings = S.ings.length ? S.ings.join(', ') : 'common pantry items';
   const prefs = S.prefs.diet?.length ? `Dietary restrictions: ${S.prefs.diet.join(', ')}.` : '';
-  const user = `I have these ingredients: ${ings}. My mood is: ${mood}. ${prefs} Suggest 4 meals I can make. For each meal return: name, emoji, calories (number), cookTime (string), prepTime (string), difficulty (Easy/Medium/Hard), moodTag (${mood}), matchedIngredients (array of strings from my ingredients list), extraIngredients (array of strings I still need), ingredients (array of {item, amount, unit}), steps (array of {stepNumber, instruction, timerSeconds (number or null)}), chefTip (string), servingSuggestion (string), moodMatch (number 0-100), funFact (string). Return as a JSON array only.`;
+  const user = `I have these ingredients: ${ings}. My mood is: ${mood}. ${prefs} Skill level: ${S.prefs.skill||'Just Starting'}. Servings needed: ${S.prefs.servings||2}. Suggest 4 meals I can make. For each meal return: name, emoji, calories (number), cookTime (string), prepTime (string), difficulty (Easy/Medium/Hard), moodTag (${mood}), matchedIngredients (array of strings from my ingredients list), extraIngredients (array of strings I still need), ingredients (array of {item, amount, unit}), steps (array of {stepNumber, instruction, timerSeconds (number or null)}), chefTip (string), servingSuggestion (string), moodMatch (number 0-100), funFact (string). Return as a JSON array only.`;
   try {
     return await callClaudeAPI(sys, user);
   } catch(e) {
@@ -568,7 +573,7 @@ document.getElementById('inspireBtn').addEventListener('click',async()=>{
   try{
     const sys='You are a food inspiration engine. Respond in raw JSON only. No markdown, no explanation, no code blocks.';
     const prefs=S.prefs.diet?.length?'Dietary restrictions: '+S.prefs.diet.join(', ')+'.':'';
-    const user='Give me 6 meal ideas for someone in a '+S.selectedMoodTab+' mood who wants '+S.selectedFoodType+' food. '+prefs+' For each return: name, emoji, calories (number), cookTime, prepTime, difficulty (Easy/Medium/Hard), description (max 15 words), funFact (max 20 words), moodMatch (0-100), ingredients (array of {item,amount,unit}), steps (array of {stepNumber,instruction,timerSeconds or null}), chefTip, servingSuggestion. Return as JSON array only.';
+    const user='Give me 6 meal ideas for someone in a '+S.selectedMoodTab+' mood who wants '+S.selectedFoodType+' food. '+prefs+' Skill level: '+(S.prefs.skill||'Just Starting')+'. Servings needed: '+(S.prefs.servings||2)+'. For each return: name, emoji, calories (number), cookTime, prepTime, difficulty (Easy/Medium/Hard), description (max 15 words), funFact (max 20 words), moodMatch (0-100), ingredients (array of {item,amount,unit}), steps (array of {stepNumber,instruction,timerSeconds or null}), chefTip, servingSuggestion. Return as JSON array only.';
     let meals;
     try{meals=await callClaudeAPI(sys,user);}catch(e){meals=getMockMeals(S.selectedMoodTab).map(m=>({...m,description:m.chefTip?.slice(0,60)||'Delicious and satisfying.'}));}
     S.moodMeals=meals;incrementRate();updateRateUI();renderMoodGrid(meals,res);
@@ -708,7 +713,7 @@ function renderItemsList(){
   const el=document.getElementById('itemsList');
   if(!SPLITS.items.length){el.innerHTML='<div class="empty-state"><span class="empty-state-emoji">🧾</span><p>No items yet</p></div>';return;}
   el.innerHTML='';
-  SPLITS.items.forEach((item,i)=>{const row=document.createElement('div');row.className='split-item-row';row.innerHTML=`<span style="flex:1">${item.name}</span><span class="item-price">$${item.price.toFixed(2)}</span><span style="color:var(--muted);font-size:0.8rem">${item.buyer}</span><button onclick="SPLITS.items.splice(${i},1);renderItemsList()" style="background:none;border:none;cursor:pointer;color:var(--primary);font-size:1rem">🗑️</button>`;el.appendChild(row);});
+  SPLITS.items.forEach((item,i)=>{const row=document.createElement('div');row.className='split-item-row';row.innerHTML=`<span style="flex:1">${escapeHtml(item.name)}</span><span class="item-price">$${item.price.toFixed(2)}</span><span style="color:var(--muted);font-size:0.8rem">${escapeHtml(item.buyer)}</span><button type="button" style="background:none;border:none;cursor:pointer;color:var(--primary);font-size:1rem" aria-label="Remove item">🗑️</button>`;row.querySelector('button').addEventListener('click',()=>{SPLITS.items.splice(i,1);renderItemsList();});el.appendChild(row);});
 }
 
 document.getElementById('calcBtn').addEventListener('click',()=>{
@@ -735,6 +740,7 @@ document.getElementById('prefOverlay').addEventListener('click',e=>{if(e.target=
 document.getElementById('savePrefsBtn').addEventListener('click',()=>{S.prefs={diet:[...document.querySelectorAll('#dietChips .active')].map(c=>c.textContent),skill:document.querySelector('.skill-card.active')?.textContent||'Just Starting',calories:parseInt(document.getElementById('calGoal').value)||2000,servings:servNum};localStorage.setItem('cio_prefs',JSON.stringify(S.prefs));document.getElementById('prefOverlay').classList.add('hidden');showToast('Preferences saved! ✓');});
 document.getElementById('clearDataBtn').addEventListener('click',()=>{if(confirm('Clear all your data?')){localStorage.clear();showToast('Data cleared 🗑️');}});
 
+function escapeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');}
 function showToast(msg){const t=document.createElement('div');t.style.cssText='position:fixed;bottom:5rem;left:50%;transform:translateX(-50%);background:#1A0A00;color:#FFFBF2;padding:0.7rem 1.4rem;border-radius:var(--pill);font-weight:700;font-size:0.88rem;z-index:999;white-space:nowrap';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2500);}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){['recipeOverlay','cookOverlay','prefOverlay','groceryOverlay'].forEach(id=>document.getElementById(id).classList.add('hidden'));}});
 </script>
