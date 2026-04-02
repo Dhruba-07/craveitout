@@ -17,10 +17,15 @@ function isRateLimited(ip) {
 }
 
 // Patterns that suggest prompt-injection attempts
-const INJECTION_PATTERN = /ignore\s+(previous|above|all)\s+(instructions?|prompts?|rules?)|system\s*prompt|<\/?s?ystem>|you\s+are\s+now/i;
+const INJECTION_PATTERNS = [
+  /ignore\s+(previous|above|all)\s+(instructions?|prompts?|rules?)/i, // "ignore previous instructions"
+  /system\s*prompt/i,                                                  // "system prompt" references
+  /<\/?s?ystem>/i,                                                     // XML-style system tags
+  /you\s+are\s+now/i,                                                  // "you are now [different persona]"
+];
 
 function containsInjection(text) {
-  return INJECTION_PATTERN.test(text);
+  return INJECTION_PATTERNS.some(pattern => pattern.test(text));
 }
 
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || '*';
