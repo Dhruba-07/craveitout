@@ -302,6 +302,67 @@ body.dark .mood-card,body.dark .splitter-section,body.dark .ing-box{background:#
 .rate-dots{display:flex;gap:0.25rem;justify-content:center;margin-top:0.5rem}
 .rate-dot{width:8px;height:8px;border-radius:50%;background:#EEDCD0;transition:background 0.3s}
 .rate-dot.used{background:var(--primary)}
+
+/* ── COOKBOOK ── */
+.cb-level{margin-bottom:1.8rem}
+.cb-level-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.25rem}
+.cb-level-title{font-family:'Fredoka One',cursive;font-size:1.35rem}
+.cb-level-count{font-size:0.72rem;font-weight:800;color:var(--muted);background:var(--bg);padding:0.25rem 0.7rem;border-radius:var(--pill)}
+.cb-level-sub{font-size:0.78rem;color:var(--muted);font-weight:600;margin-bottom:0.8rem}
+.cb-scroll{display:flex;gap:0.65rem;overflow-x:auto;padding-bottom:0.5rem;-ms-overflow-style:none;scrollbar-width:none}
+.cb-scroll::-webkit-scrollbar{display:none}
+.cb-lock-wrap{position:relative}
+.cb-lock-fade{position:absolute;bottom:0;left:0;right:0;height:70px;background:linear-gradient(transparent,var(--bg));pointer-events:none;z-index:2}
+.cb-dish-card{min-width:136px;max-width:136px;background:var(--card);border-radius:18px;padding:0.85rem 0.65rem;border:2px solid #EEDCD0;flex-shrink:0;cursor:pointer;transition:transform 0.15s var(--spring),box-shadow 0.15s}
+.cb-dish-card:active{transform:scale(0.91)}
+.cb-dish-card:hover{box-shadow:0 6px 18px rgba(255,48,8,0.12)}
+.cb-dish-emoji{font-size:2.1rem;display:block;text-align:center;margin-bottom:0.35rem}
+.cb-dish-name{font-family:'Fredoka One',cursive;font-size:0.82rem;text-align:center;color:var(--text);margin-bottom:0.2rem;line-height:1.2;min-height:2rem}
+.cb-dish-origin{font-size:0.68rem;text-align:center;color:var(--muted);font-weight:700;margin-bottom:0.35rem}
+.cb-dish-meta{display:flex;justify-content:center;gap:0.3rem;flex-wrap:wrap}
+.cb-dish-time{font-size:0.62rem;background:#FFF3E0;color:#E65100;padding:0.15rem 0.4rem;border-radius:5px;font-weight:800}
+.cb-dish-cal{font-size:0.62rem;background:#E8F5E9;color:#2E7D32;padding:0.15rem 0.4rem;border-radius:5px;font-weight:800}
+.cb-level-beginner .cb-dish-card{border-color:#C8E6C9}
+.cb-level-intermediate .cb-dish-card{border-color:#FFE0B2}
+.cb-level-hard .cb-dish-card{border-color:#FFCCBC}
+.cb-unlock-card{background:linear-gradient(145deg,#1A0A00 0%,#2E1000 100%);border-radius:var(--radius);padding:1.4rem;text-align:center;margin-top:0.5rem;position:relative;overflow:hidden}
+.cb-unlock-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% -10%,rgba(255,140,0,0.22),transparent 65%);pointer-events:none}
+.cb-unlock-icon{font-size:2.4rem;display:block;margin-bottom:0.5rem}
+.cb-unlock-title{font-family:'Fredoka One',cursive;font-size:1.2rem;color:#FFFBF2;margin-bottom:0.35rem}
+.cb-unlock-sub{font-size:0.8rem;color:rgba(255,251,242,0.65);font-weight:600;margin-bottom:1rem;line-height:1.5}
+.cb-unlock-btn{padding:0.75rem 1.8rem;border-radius:var(--pill);background:linear-gradient(135deg,#FF3008,#FF8C00);color:#fff;border:none;font-family:'Fredoka One',cursive;font-size:0.95rem;cursor:pointer;box-shadow:0 6px 20px rgba(255,48,8,0.45);transition:transform 0.15s var(--spring)}
+.cb-unlock-btn:active{transform:scale(0.94)}
+.cb-premium-banner{display:flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,rgba(255,48,8,0.08),rgba(255,140,0,0.08));border:1.5px solid rgba(255,140,0,0.3);border-radius:14px;padding:0.75rem 1rem;margin-bottom:1.2rem}
+.cb-premium-icon{font-size:1.4rem}
+.cb-premium-text{flex:1}
+.cb-premium-label{font-family:'Fredoka One',cursive;font-size:0.9rem;color:var(--secondary)}
+.cb-premium-desc{font-size:0.72rem;color:var(--muted);font-weight:700}
+.cb-premium-lock{font-size:1.1rem}
+
+/* ── STEP SLIDE ANIMATION ── */
+@keyframes stepSlideIn{from{transform:translateX(55px);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes stepSlideBack{from{transform:translateX(-55px);opacity:0}to{transform:translateX(0);opacity:1}}
+.step-anim-in{animation:stepSlideIn 0.3s var(--spring) both}
+.step-anim-back{animation:stepSlideBack 0.3s var(--spring) both}
+
+/* ── SEARCH BURST ── */
+@keyframes searchBurstFly{0%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(0.2);opacity:0}}
+
+/* ── QUOTE MODAL ── */
+.quote-overlay{position:fixed;inset:0;background:rgba(26,10,0,0.92);z-index:980;display:flex;align-items:center;justify-content:center;padding:1.4rem;transition:opacity 0.4s}
+.quote-overlay.hidden{opacity:0;pointer-events:none}
+.quote-card{background:var(--card);border-radius:28px;padding:2rem 1.5rem;max-width:360px;width:100%;text-align:center;animation:quoteCardIn 0.5s var(--spring) both}
+@keyframes quoteCardIn{from{transform:scale(0.65) translateY(50px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.quote-badge{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:0.4rem 1.1rem;border-radius:var(--pill);font-size:0.78rem;font-weight:800;display:inline-block;margin-bottom:0.8rem}
+.quote-dish-emoji{font-size:3.8rem;display:block;margin:0.4rem 0;animation:iconPop 0.5s var(--spring) 0.2s both}
+.quote-text{font-family:'Fredoka One',cursive;font-size:1.15rem;color:var(--text);line-height:1.55;margin:0.9rem 0 0.4rem;font-style:italic}
+.quote-author{font-size:0.8rem;color:var(--muted);font-weight:700;margin-bottom:1.3rem}
+.quote-close-btn{padding:0.8rem 2rem;border-radius:var(--pill);background:var(--primary);color:#fff;border:none;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;box-shadow:0 6px 20px rgba(255,48,8,0.35);transition:transform 0.15s var(--spring)}
+.quote-close-btn:active{transform:scale(0.95)}
+body.dark .cb-dish-card{border-color:#2A1500}
+body.dark .cb-level-beginner .cb-dish-card{border-color:#1A3A20}
+body.dark .cb-level-intermediate .cb-dish-card{border-color:#3A2000}
+body.dark .cb-level-hard .cb-dish-card{border-color:#3A1500}
 </style>
 </head>
 <body>
@@ -333,6 +394,10 @@ body.dark .mood-card,body.dark .splitter-section,body.dark .ing-box{background:#
     <button class="tab-btn" data-tab="mood" aria-label="Mood tab">
       <span class="tab-icon">🌡️</span>
       <span class="tab-label">Mood</span>
+    </button>
+    <button class="tab-btn" data-tab="cookbook" aria-label="Cookbook tab">
+      <span class="tab-icon">📖</span>
+      <span class="tab-label">Recipes</span>
     </button>
   </div>
 </header>
@@ -397,6 +462,12 @@ body.dark .mood-card,body.dark .splitter-section,body.dark .ing-box{background:#
     <div class="food-pills" id="foodPills"></div>
     <button class="find-btn" id="inspireBtn">Inspire Me! 🔥</button>
     <div id="moodResults" style="margin-top:1rem"></div>
+  </div>
+
+  <div id="cookbookTab" style="display:none">
+    <h2 class="hero-title">World Cookbook 📖</h2>
+    <p class="hero-sub">150 dishes from 40+ countries — 3 skill levels 🌍</p>
+    <div id="cbContent"></div>
   </div>
 </main>
 
@@ -481,6 +552,17 @@ body.dark .mood-card,body.dark .splitter-section,body.dark .ing-box{background:#
   </div>
 </div>
 
+<!-- Quote Modal (shown after cooking a dish) -->
+<div class="quote-overlay hidden" id="quoteOverlay">
+  <div class="quote-card">
+    <span class="quote-badge">🏆 Dish Complete!</span>
+    <span class="quote-dish-emoji" id="quoteDishEmoji">🍽️</span>
+    <p class="quote-text" id="quoteText"></p>
+    <p class="quote-author" id="quoteAuthor"></p>
+    <button class="quote-close-btn" id="quoteCloseBtn">Keep Cooking 🔥</button>
+  </div>
+</div>
+
 <!-- Paywall Modal -->
 <div class="paywall-overlay hidden" id="paywallOverlay">
   <div class="paywall-sheet">
@@ -517,7 +599,7 @@ body.dark .mood-card,body.dark .splitter-section,body.dark .ing-box{background:#
 const S={
   ings:[],selectedMood:null,selectedMoodTab:null,selectedFoodType:'Any',
   meals:[],moodMeals:[],activeRecipe:null,
-  people:[],items:[],
+  people:[],items:[],isFetching:false,
   favorites:JSON.parse(localStorage.getItem('cio_favs')||'[]'),
   prefs:JSON.parse(localStorage.getItem('cio_prefs')||'{"diet":[],"skill":"Just Starting","calories":2000,"servings":2}'),
   cookSteps:[],cookIdx:0,cookTimerInterval:null,
@@ -533,7 +615,7 @@ if(S.darkMode)document.body.classList.add('dark');
 document.getElementById('darkBtn').addEventListener('click',()=>{S.darkMode=!S.darkMode;document.body.classList.toggle('dark',S.darkMode);document.getElementById('darkBtn').textContent=S.darkMode?'☀️':'🌙';localStorage.setItem('cio_dark',S.darkMode?'1':'0');});
 
 const tabs=document.querySelectorAll('.tab-btn');
-const tabViews={fridge:'fridgeTab',splitter:'splitterTab',mood:'moodTab'};
+const tabViews={fridge:'fridgeTab',splitter:'splitterTab',mood:'moodTab',cookbook:'cookbookTab'};
 const slider=document.getElementById('tabSlider');
 function updateSlider(btn){const bar=document.getElementById('tabBar');const br=bar.getBoundingClientRect();const r=btn.getBoundingClientRect();slider.style.left=(r.left-br.left)+'px';slider.style.width=r.width+'px';}
 tabs.forEach(btn=>{btn.addEventListener('click',()=>{tabs.forEach(b=>b.classList.remove('active'));btn.classList.add('active');updateSlider(btn);Object.values(tabViews).forEach(v=>document.getElementById(v).style.display='none');document.getElementById(tabViews[btn.dataset.tab]).style.display='block';});});
@@ -544,6 +626,188 @@ const FOOD_TYPES=['🍽️ Any','🥩 Meat','🐟 Seafood','🥦 Veg','🍜 Past
 const DIET_OPTIONS=['Vegetarian','Vegan','Gluten-Free','Dairy-Free','Nut Allergy','Halal','Kosher','Low-Carb','Keto'];
 const SKILLS=['🥚 Just Starting','🍳 Getting Good','👨‍🍳 Pretty Skilled','👑 Chef Level'];
 const PERSON_COLORS=['#FF3008','#FF8C00','#FFD600','#FF6B6B','#00C853','#7C4DFF'];
+
+const COOKING_QUOTES=[
+  {text:"Tell me what you eat, and I will tell you what you are.",author:"Jean Anthelme Brillat-Savarin"},
+  {text:"People who love to eat are always the best people.",author:"Julia Child"},
+  {text:"A recipe has no soul. You, as the cook, must bring soul to the recipe.",author:"Thomas Keller"},
+  {text:"Cooking is like love — it should be entered into with abandon or not at all.",author:"Harriet van Horne"},
+  {text:"You don't have to cook fancy masterpieces — just good food from fresh ingredients.",author:"Julia Child"},
+  {text:"The discovery of a new dish does more for human happiness than the discovery of a new star.",author:"Brillat-Savarin"},
+  {text:"First, we eat. Then, we do everything else.",author:"M.F.K. Fisher"},
+  {text:"There is no sincerer love than the love of food.",author:"George Bernard Shaw"},
+  {text:"One cannot think well, love well, sleep well, if one has not dined well.",author:"Virginia Woolf"},
+  {text:"In cooking, you've got to have a what-the-hell attitude.",author:"Julia Child"},
+  {text:"Cooking is at once child's play and adult joy. And cooking done with care is an act of love.",author:"Craig Claiborne"},
+  {text:"The kitchen is the heart of every home.",author:"Unknown"},
+  {text:"Food is the ingredient that binds us together.",author:"Unknown"},
+  {text:"Let food be thy medicine and medicine be thy food.",author:"Hippocrates"},
+  {text:"Eating is a necessity, but cooking is an art.",author:"Unknown"},
+  {text:"Life is uncertain. Eat dessert first.",author:"Ernestine Ulmer"},
+  {text:"Cooking is love made visible.",author:"Unknown"},
+  {text:"The secret ingredient is always love.",author:"Unknown"},
+  {text:"To eat is a necessity, but to eat intelligently is an art.",author:"La Rochefoucauld"},
+  {text:"Food brings people together on many different levels. It's nourishment of the soul and body.",author:"Giada De Laurentiis"}
+];
+
+const COOKBOOK={
+  beginner:[
+    {n:'Scrambled Eggs',e:'🍳',o:'🇺🇸 USA',t:'5 min',c:220,d:'Fluffy creamy eggs in under 5 minutes'},
+    {n:'Aglio e Olio',e:'🍝',o:'🇮🇹 Italy',t:'20 min',c:380,d:'Pasta in golden garlic-infused olive oil'},
+    {n:'Greek Salad',e:'🥗',o:'🇬🇷 Greece',t:'10 min',c:180,d:'Fresh tomatoes, olives and creamy feta'},
+    {n:'Avocado Toast',e:'🥑',o:'🇦🇺 Australia',t:'8 min',c:260,d:'Creamy smashed avocado on sourdough'},
+    {n:'Banana Pancakes',e:'🥞',o:'🇺🇸 USA',t:'15 min',c:380,d:'Fluffy golden stacks with maple syrup'},
+    {n:'French Toast',e:'🍞',o:'🇫🇷 France',t:'12 min',c:340,d:'Egg-soaked bread fried crispy and golden'},
+    {n:'Cheese Quesadilla',e:'🫓',o:'🇲🇽 Mexico',t:'8 min',c:440,d:'Gooey melted cheese in toasted tortilla'},
+    {n:'Egg Fried Rice',e:'🍳',o:'🇨🇳 China',t:'10 min',c:360,d:'Wok-tossed leftover rice with egg and soy'},
+    {n:'Caprese Salad',e:'🍅',o:'🇮🇹 Italy',t:'5 min',c:210,d:'Ripe tomatoes, mozzarella and fresh basil'},
+    {n:'BLT Sandwich',e:'🥪',o:'🇺🇸 USA',t:'10 min',c:420,d:'Crispy bacon, lettuce and tomato classic'},
+    {n:'Caesar Salad',e:'🥗',o:'🇲🇽 Mexico',t:'15 min',c:290,d:'Romaine with anchovy dressing and croutons'},
+    {n:'Tomato Soup',e:'🍅',o:'🇬🇧 UK',t:'25 min',c:160,d:'Velvety smooth roasted tomato soup'},
+    {n:'Grilled Cheese',e:'🧀',o:'🇺🇸 USA',t:'8 min',c:470,d:'Buttery golden crispy melted cheese sandwich'},
+    {n:'Bruschetta',e:'🥖',o:'🇮🇹 Italy',t:'10 min',c:190,d:'Garlic toast topped with fresh tomatoes and basil'},
+    {n:'Guacamole',e:'🥑',o:'🇲🇽 Mexico',t:'8 min',c:160,d:'Creamy smashed avocado with lime and coriander'},
+    {n:'Hummus',e:'🫙',o:'🇱🇧 Lebanon',t:'10 min',c:170,d:'Silky smooth chickpea and tahini dip'},
+    {n:'Tzatziki',e:'🫙',o:'🇬🇷 Greece',t:'10 min',c:80,d:'Cooling cucumber and strained yoghurt dip'},
+    {n:'Tortilla Española',e:'🍳',o:'🇪🇸 Spain',t:'25 min',c:360,d:'Classic thick Spanish potato omelette'},
+    {n:'Shakshuka',e:'🍳',o:'🇮🇱 Israel',t:'25 min',c:280,d:'Eggs poached in spiced tomato pepper sauce'},
+    {n:'Tabbouleh',e:'🌿',o:'🇱🇧 Lebanon',t:'15 min',c:130,d:'Fresh herb and bulgur wheat salad with lemon'},
+    {n:'Panzanella',e:'🥗',o:'🇮🇹 Italy',t:'15 min',c:230,d:'Tuscan torn bread and ripe tomato salad'},
+    {n:'Miso Soup',e:'🍜',o:'🇯🇵 Japan',t:'10 min',c:40,d:'Umami-rich broth with tofu and wakame'},
+    {n:'Onigiri',e:'🍙',o:'🇯🇵 Japan',t:'15 min',c:200,d:'Hand-pressed rice ball with savoury filling'},
+    {n:'Korean Cucumber Salad',e:'🥒',o:'🇰🇷 Korea',t:'10 min',c:60,d:'Spicy sesame-dressed cucumber ribbons'},
+    {n:'Pico de Gallo',e:'🍅',o:'🇲🇽 Mexico',t:'10 min',c:40,d:'Fresh chunky tomato, onion and jalapeño salsa'},
+    {n:'Gazpacho',e:'🍅',o:'🇪🇸 Spain',t:'15 min',c:90,d:'Chilled blended raw tomato summer soup'},
+    {n:'Garlic Sautéed Spinach',e:'🌿',o:'🇮🇹 Italy',t:'8 min',c:70,d:'Wilted spinach with golden garlic and lemon'},
+    {n:'Menemen',e:'🍳',o:'🇹🇷 Turkey',t:'15 min',c:260,d:'Turkish scrambled eggs with peppers and tomato'},
+    {n:'Jacket Potato',e:'🥔',o:'🇬🇧 UK',t:'60 min',c:290,d:'Fluffy baked potato loaded with toppings'},
+    {n:'Fresh Spring Rolls',e:'🫕',o:'🇻🇳 Vietnam',t:'20 min',c:140,d:'Rice paper rolls filled with shrimp and herbs'},
+    {n:'Mexican Rice',e:'🍚',o:'🇲🇽 Mexico',t:'25 min',c:220,d:'Tomato-flavoured fluffy long-grain rice'},
+    {n:'Elote (Street Corn)',e:'🌽',o:'🇲🇽 Mexico',t:'10 min',c:190,d:'Grilled corn with chilli, lime and cotija'},
+    {n:'Garlic Bread',e:'🥖',o:'🇮🇹 Italy',t:'10 min',c:230,d:'Buttery herbed baguette baked until golden'},
+    {n:'Yoghurt Parfait',e:'🫙',o:'🇺🇸 USA',t:'5 min',c:280,d:'Creamy yoghurt layered with granola and berries'},
+    {n:'Fruit Salad',e:'🍓',o:'🌍 International',t:'10 min',c:110,d:'Fresh mixed seasonal fruit with mint drizzle'},
+    {n:'Overnight Oats',e:'🥣',o:'🇨🇭 Switzerland',t:'5 min',c:310,d:'No-cook creamy oats with berries and seeds'},
+    {n:'Masoor Dal',e:'🫕',o:'🇮🇳 India',t:'30 min',c:250,d:'Warming red lentil soup with cumin and turmeric'},
+    {n:'Vegetable Stir-Fry',e:'🥬',o:'🇨🇳 China',t:'12 min',c:160,d:'Crisp colourful wok-tossed vegetables'},
+    {n:'Pesto Pasta',e:'🍝',o:'🇮🇹 Italy',t:'15 min',c:520,d:'Fresh basil pesto tossed with al dente pasta'},
+    {n:'Spaghetti Marinara',e:'🍝',o:'🇮🇹 Italy',t:'20 min',c:430,d:'Classic slow-cooked tomato pasta sauce'},
+    {n:'Bok Choy Stir-Fry',e:'🥬',o:'🇨🇳 China',t:'8 min',c:60,d:'Garlicky golden wilted bok choy'},
+    {n:'Fattoush Salad',e:'🥗',o:'🇱🇧 Lebanon',t:'15 min',c:180,d:'Crispy pita chips and fresh vegetable salad'},
+    {n:'Aloo Sabzi',e:'🍳',o:'🇮🇳 India',t:'20 min',c:240,d:'Spiced Indian dry potato curry'},
+    {n:'Simple Risotto',e:'🍚',o:'🇮🇹 Italy',t:'30 min',c:440,d:'Creamy arborio rice stirred with parmesan'},
+    {n:'Naan Bread',e:'🥐',o:'🇮🇳 India',t:'25 min',c:280,d:'Soft pillowy flatbread baked in the oven'},
+    {n:'Baba Ganoush',e:'🫙',o:'🇱🇧 Lebanon',t:'35 min',c:120,d:'Smoky charred aubergine dip with tahini'},
+    {n:'Niçoise Salad',e:'🥗',o:'🇫🇷 France',t:'20 min',c:310,d:'Tuna, egg, olives and green bean French salad'},
+    {n:'Egg Drop Soup',e:'🍳',o:'🇨🇳 China',t:'10 min',c:80,d:'Silky golden broth with wispy egg ribbons'},
+    {n:'Ramen Upgrade',e:'🍜',o:'🇯🇵 Japan',t:'15 min',c:420,d:'Instant ramen elevated with toppings'},
+    {n:'Minestrone Soup',e:'🫕',o:'🇮🇹 Italy',t:'35 min',c:200,d:'Hearty Italian vegetable and pasta soup'}
+  ],
+  intermediate:[
+    {n:'Chicken Tikka Masala',e:'🍛',o:'🇬🇧 UK',t:'45 min',c:580,d:'Creamy tomato-spiced chicken curry with naan'},
+    {n:'Tacos al Pastor',e:'🌮',o:'🇲🇽 Mexico',t:'35 min',c:490,d:'Marinated pork tacos with pineapple and salsa'},
+    {n:'Pad Thai',e:'🍜',o:'🇹🇭 Thailand',t:'30 min',c:550,d:'Stir-fried rice noodles with tamarind and peanuts'},
+    {n:'Salmon Teriyaki',e:'🐟',o:'🇯🇵 Japan',t:'20 min',c:420,d:'Lacquered salmon in sweet soy teriyaki glaze'},
+    {n:'Beef Stroganoff',e:'🥘',o:'🇷🇺 Russia',t:'40 min',c:610,d:'Tender beef strips in sour cream mushroom sauce'},
+    {n:'Chicken Parmesan',e:'🍗',o:'🇺🇸 USA',t:'40 min',c:650,d:'Golden crumbed chicken with marinara and cheese'},
+    {n:'Butter Chicken',e:'🍛',o:'🇮🇳 India',t:'50 min',c:620,d:'Mild creamy tomato-butter marinated chicken curry'},
+    {n:'Laksa',e:'🍜',o:'🇲🇾 Malaysia',t:'45 min',c:590,d:'Spicy coconut milk noodle soup with prawns'},
+    {n:'Moussaka',e:'🥘',o:'🇬🇷 Greece',t:'75 min',c:530,d:'Layered aubergine, spiced lamb and béchamel bake'},
+    {n:'Chicken Biryani',e:'🍚',o:'🇮🇳 India',t:'60 min',c:680,d:'Fragrant basmati rice layered with spiced chicken'},
+    {n:'Beef Bulgogi',e:'🥩',o:'🇰🇷 Korea',t:'30 min',c:480,d:'Sweet soy-sesame marinated grilled beef'},
+    {n:'Tom Yum Soup',e:'🍲',o:'🇹🇭 Thailand',t:'30 min',c:180,d:'Hot and sour lemongrass prawn soup'},
+    {n:'Ceviche',e:'🐟',o:'🇵🇪 Peru',t:'20 min',c:190,d:'Lime-cured raw fish with aji amarillo'},
+    {n:'Hungarian Goulash',e:'🥘',o:'🇭🇺 Hungary',t:'90 min',c:520,d:'Hearty paprika beef and vegetable stew'},
+    {n:'Chicken Adobo',e:'🍗',o:'🇵🇭 Philippines',t:'45 min',c:490,d:'Vinegar-soy braised chicken, deeply savoury'},
+    {n:'Banh Mi',e:'🥖',o:'🇻🇳 Vietnam',t:'20 min',c:450,d:'Crispy baguette with pickled veg, pâté and herbs'},
+    {n:'Falafel',e:'🫙',o:'🇱🇧 Lebanon',t:'30 min',c:330,d:'Crispy deep-fried spiced chickpea balls'},
+    {n:'Chicken Souvlaki',e:'🍢',o:'🇬🇷 Greece',t:'25 min',c:370,d:'Skewered marinated chicken grilled to perfection'},
+    {n:'Jerk Chicken',e:'🍗',o:'🇯🇲 Jamaica',t:'50 min',c:520,d:'Fiery allspice-scotch bonnet marinated chicken'},
+    {n:'Pho Bo',e:'🍜',o:'🇻🇳 Vietnam',t:'60 min',c:380,d:'Vietnamese slow-simmered beef noodle soup'},
+    {n:'California Roll',e:'🍣',o:'🇺🇸 USA',t:'40 min',c:290,d:'Crab, avocado and cucumber inside-out sushi'},
+    {n:'Bibimbap',e:'🍲',o:'🇰🇷 Korea',t:'40 min',c:560,d:'Korean rice bowl with vegetables and fried egg'},
+    {n:'Chicken Shawarma',e:'🫓',o:'🇱🇧 Lebanon',t:'45 min',c:530,d:'Spiced rotisserie-style chicken in flatbread'},
+    {n:'Fish & Chips',e:'🐟',o:'🇬🇧 UK',t:'40 min',c:780,d:'Beer-battered crispy fish with chunky fried chips'},
+    {n:'Enchiladas Rojas',e:'🫓',o:'🇲🇽 Mexico',t:'45 min',c:580,d:'Corn tortillas rolled with filling in red chilli sauce'},
+    {n:'Lamb Kofta',e:'🫕',o:'🇹🇷 Turkey',t:'30 min',c:450,d:'Spiced minced lamb kneaded onto skewers and grilled'},
+    {n:'Chimichurri Steak',e:'🥩',o:'🇦🇷 Argentina',t:'25 min',c:620,d:'Grilled skirt steak drenched in herb chimichurri'},
+    {n:'Nasi Goreng',e:'🍗',o:'🇮🇩 Indonesia',t:'25 min',c:540,d:'Indonesian spiced fried rice with egg and crackers'},
+    {n:"General Tso's Chicken",e:'🍗',o:'🇺🇸 USA',t:'35 min',c:590,d:'Crispy chicken in sticky sweet-spicy sauce'},
+    {n:'Chicken Marsala',e:'🍗',o:'🇮🇹 Italy',t:'30 min',c:510,d:'Pan-fried chicken in Marsala wine mushroom sauce'},
+    {n:'Pork Tonkatsu',e:'🍖',o:'🇯🇵 Japan',t:'30 min',c:560,d:'Panko-crumbed deep-fried pork with tonkatsu sauce'},
+    {n:'Stuffed Peppers',e:'🫑',o:'🌍 International',t:'50 min',c:420,d:'Colourful peppers stuffed with seasoned meat and rice'},
+    {n:'Chicken Fajitas',e:'🌮',o:'🇲🇽 Mexico',t:'25 min',c:480,d:'Sizzling spiced chicken with peppers and onions'},
+    {n:'Beef Rendang',e:'🥘',o:'🇮🇩 Indonesia',t:'90 min',c:560,d:'Slow-cooked dry coconut beef curry'},
+    {n:'Turkish Döner',e:'🍢',o:'🇹🇷 Turkey',t:'30 min',c:480,d:'Spiced minced meat on flat skewers, grilled'},
+    {n:'Borscht',e:'🍲',o:'🇺🇦 Ukraine',t:'60 min',c:210,d:'Vibrant sweet-sour beetroot and cabbage soup'},
+    {n:'Clam Chowder',e:'🍲',o:'🇺🇸 USA',t:'40 min',c:480,d:'Creamy New England clam and potato soup'},
+    {n:'Chicken Tagine',e:'🫕',o:'🇲🇦 Morocco',t:'60 min',c:490,d:'Slow-braised chicken with preserved lemon and olives'},
+    {n:'Arroz con Pollo',e:'🍗',o:'🇪🇸 Spain',t:'50 min',c:570,d:'Spanish saffron-infused chicken and rice'},
+    {n:'Lomo Saltado',e:'🥩',o:'🇵🇪 Peru',t:'30 min',c:540,d:'Stir-fried beef with chips, tomato and soy'},
+    {n:'Bobotie',e:'🥘',o:'🇿🇦 South Africa',t:'60 min',c:490,d:'Spiced minced meat with savoury egg custard topping'},
+    {n:'Hainanese Chicken',e:'🍗',o:'🇸🇬 Singapore',t:'50 min',c:520,d:'Poached chicken over fragrant ginger rice'},
+    {n:'Udon Noodle Soup',e:'🍜',o:'🇯🇵 Japan',t:'30 min',c:420,d:'Thick wheat noodles in rich dashi broth'},
+    {n:'Lamb Chops',e:'🥩',o:'🌍 Mediterranean',t:'25 min',c:540,d:'Rosemary and garlic marinated grilled lamb chops'},
+    {n:'Chicken Katsu Curry',e:'🍗',o:'🇯🇵 Japan',t:'40 min',c:650,d:'Crispy panko chicken with Japanese curry sauce'},
+    {n:'Red Thai Curry',e:'🫕',o:'🇹🇭 Thailand',t:'30 min',c:520,d:'Coconut milk prawn curry with fragrant red paste'},
+    {n:'Seekh Kebab',e:'🍢',o:'🇵🇰 Pakistan',t:'30 min',c:410,d:'Minced lamb with coriander on flat skewers'},
+    {n:'Spaghetti Carbonara',e:'🍝',o:'🇮🇹 Italy',t:'20 min',c:580,d:'Silky egg-based pasta with guanciale and pepper'},
+    {n:'Tuna Niçoise',e:'🥗',o:'🇫🇷 France',t:'25 min',c:370,d:'Seared tuna with olives, beans and egg'},
+    {n:'French Onion Soup',e:'🍲',o:'🇫🇷 France',t:'60 min',c:380,d:'Deeply caramelised onion soup with gruyère crouton'}
+  ],
+  hard:[
+    {n:'Beef Wellington',e:'🥩',o:'🇬🇧 UK',t:'90 min',c:820,d:'Beef fillet in mushroom duxelles baked in pastry'},
+    {n:'Croissants',e:'🥐',o:'🇫🇷 France',t:'3 hrs',c:450,d:'Laminated butter dough rolled into flaky perfection'},
+    {n:'Boeuf Bourguignon',e:'🥘',o:'🇫🇷 France',t:'3 hrs',c:640,d:'Red wine braised beef with pearl onions and lardons'},
+    {n:'Peking Duck',e:'🦆',o:'🇨🇳 China',t:'2 hrs',c:760,d:'Air-dried lacquered roasted duck with pancakes'},
+    {n:'Ramen from Scratch',e:'🍜',o:'🇯🇵 Japan',t:'4 hrs',c:720,d:'12-hour tonkotsu bone broth with noodles'},
+    {n:'Nigiri Sushi',e:'🍣',o:'🇯🇵 Japan',t:'60 min',c:290,d:'Hand-pressed seasoned rice with sliced raw fish'},
+    {n:'Crème Brûlée',e:'🍮',o:'🇫🇷 France',t:'60 min',c:380,d:'Silky baked vanilla custard with caramelised sugar top'},
+    {n:'Lobster Bisque',e:'🦞',o:'🇫🇷 France',t:'90 min',c:420,d:'Rich shellfish broth with cream and cognac'},
+    {n:'Goan Vindaloo',e:'🥘',o:'🇮🇳 India',t:'90 min',c:580,d:'Fiery vinegar-spiced pork curry with dried chillis'},
+    {n:'Mille-feuille',e:'🍰',o:'🇫🇷 France',t:'90 min',c:510,d:'Puff pastry layered with vanilla crème pâtissière'},
+    {n:'Xiao Long Bao',e:'🥟',o:'🇨🇳 China',t:'2 hrs',c:290,d:'Steamed Shanghai soup dumplings with pork filling'},
+    {n:'Hand-pulled Noodles',e:'🍜',o:'🇨🇳 China',t:'60 min',c:380,d:'Chewy noodles stretched and folded by hand'},
+    {n:'Bouillabaisse',e:'🐟',o:'🇫🇷 France',t:'90 min',c:440,d:"Marseille fisherman's saffron seafood stew"},
+    {n:"Duck à l'Orange",e:'🦆',o:'🇫🇷 France',t:'90 min',c:680,d:'Whole roasted duck with bitter orange sauce'},
+    {n:'Osso Buco',e:'🦴',o:'🇮🇹 Italy',t:'2.5 hrs',c:620,d:'Braised veal shanks with saffron gremolata'},
+    {n:'Paella Valenciana',e:'🫕',o:'🇪🇸 Spain',t:'60 min',c:640,d:'Saffron rice with rabbit, snails and green beans'},
+    {n:'Cheese Soufflé',e:'🧀',o:'🇫🇷 France',t:'45 min',c:320,d:'Light airy baked soufflé that must not fall'},
+    {n:'French Macarons',e:'🍬',o:'🇫🇷 France',t:'90 min',c:210,d:'Delicate almond meringue sandwich cookies'},
+    {n:'Croquembouche',e:'🍮',o:'🇫🇷 France',t:'3 hrs',c:580,d:'Caramel-bound tower of cream-filled profiteroles'},
+    {n:'Chicken Kiev',e:'🍗',o:'🇺🇦 Ukraine',t:'60 min',c:690,d:'Herb butter-stuffed crumbed chicken breast'},
+    {n:'Beef Tataki',e:'🥩',o:'🇯🇵 Japan',t:'30 min',c:280,d:'Flash-seared rare beef sliced thin with ponzu'},
+    {n:'Pho from Scratch',e:'🍜',o:'🇻🇳 Vietnam',t:'6 hrs',c:380,d:'Char-grilled bone broth noodle soup'},
+    {n:'Mole Negro',e:'🫕',o:'🇲🇽 Mexico',t:'3 hrs',c:490,d:'Complex 30-ingredient chilli and chocolate sauce'},
+    {n:'Lobster Thermidor',e:'🦞',o:'🇫🇷 France',t:'60 min',c:480,d:'Lobster halves in cream, mustard and gruyère sauce'},
+    {n:'Slow-Roasted Lamb',e:'🥩',o:'🌍 Mediterranean',t:'4 hrs',c:680,d:'8-hour falling-off-the-bone whole lamb shoulder'},
+    {n:'Injera & Doro Wat',e:'🫓',o:'🇪🇹 Ethiopia',t:'2 hrs',c:520,d:'Fermented teff flatbread with spiced chicken stew'},
+    {n:'Fesenjan',e:'🍗',o:'🇮🇷 Iran',t:'90 min',c:560,d:'Pomegranate molasses and walnut chicken stew'},
+    {n:'Spanakopita',e:'🥐',o:'🇬🇷 Greece',t:'75 min',c:380,d:'Crispy filo pastry filled with spinach and feta'},
+    {n:'Beef Birria Tacos',e:'🌮',o:'🇲🇽 Mexico',t:'3 hrs',c:620,d:'Slow-braised consommé-dipped beef tacos'},
+    {n:'Homemade Baklava',e:'🍯',o:'🇹🇷 Turkey',t:'90 min',c:430,d:'Layered walnut-pistachio filo soaked in honey syrup'},
+    {n:'Kerala Fish Molee',e:'🐟',o:'🇮🇳 India',t:'45 min',c:360,d:'Delicate coconut milk and turmeric fish curry'},
+    {n:'Beef Carpaccio',e:'🥩',o:'🇮🇹 Italy',t:'30 min',c:240,d:'Paper-thin raw beef with truffle oil and capers'},
+    {n:'Tarte Tatin',e:'🍎',o:'🇫🇷 France',t:'75 min',c:490,d:'Upside-down caramelised apple pastry tart'},
+    {n:'Wagyu Steak Donburi',e:'🥩',o:'🇯🇵 Japan',t:'30 min',c:780,d:'A5 Wagyu over perfectly seasoned steamed rice'},
+    {n:'Lechon',e:'🐷',o:'🇵🇭 Philippines',t:'4 hrs',c:860,d:'Whole roasted suckling pig with crackling skin'},
+    {n:'Lamb Biryani',e:'🍚',o:'🇵🇰 Pakistan',t:'2 hrs',c:780,d:'Dum-cooked layered fragrant lamb and basmati rice'},
+    {n:'Duck Confit',e:'🍖',o:'🇫🇷 France',t:'8 hrs',c:640,d:'Duck slow-cooked submerged in its own rendered fat'},
+    {n:'Massaman Curry',e:'🫕',o:'🇹🇭 Thailand',t:'90 min',c:580,d:'Rich coconut and peanut paste beef curry'},
+    {n:'Opera Cake',e:'🍰',o:'🇫🇷 France',t:'2.5 hrs',c:490,d:'Layered almond sponge with coffee and ganache'},
+    {n:'Fresh Egg Pasta',e:'🍝',o:'🇮🇹 Italy',t:'60 min',c:380,d:'Hand-rolled silky egg pasta sheets from scratch'},
+    {n:'Sinigang',e:'🥘',o:'🇵🇭 Philippines',t:'50 min',c:320,d:'Sour tamarind pork and vegetable broth'},
+    {n:'Chateaubriand',e:'🥩',o:'🇫🇷 France',t:'45 min',c:680,d:'Roasted beef tenderloin centre cut for two'},
+    {n:'Pork Chashu',e:'🍖',o:'🇯🇵 Japan',t:'2 hrs',c:520,d:'Soy-mirin braised rolled pork belly for ramen'},
+    {n:'Ethiopian Berbere Lamb',e:'🫕',o:'🇪🇹 Ethiopia',t:'90 min',c:540,d:'Slow-braised lamb shoulder in berbere spice blend'},
+    {n:'Pierogi from Scratch',e:'🥟',o:'🇵🇱 Poland',t:'90 min',c:440,d:'Hand-folded potato and cheese dumplings'},
+    {n:'Black Forest Cake',e:'🍰',o:'🇩🇪 Germany',t:'90 min',c:510,d:'Cherry, kirsch and chocolate layered torte'},
+    {n:'Danish Pastry',e:'🥐',o:'🇩🇰 Denmark',t:'3 hrs',c:420,d:'Laminated yeasted pastry with custard filling'},
+    {n:'Coq au Vin',e:'🫕',o:'🇫🇷 France',t:'2 hrs',c:580,d:'Chicken braised low and slow in Burgundy red wine'},
+    {n:'Tonkotsu Broth',e:'🍜',o:'🇯🇵 Japan',t:'8 hrs',c:680,d:'18-hour pure white pork bone ramen broth'},
+    {n:'Moroccan Pastilla',e:'🥐',o:'🇲🇦 Morocco',t:'2 hrs',c:590,d:'Crispy filo pie filled with spiced pigeon and almonds'}
+  ]
+};
 
 const moodsWrap=document.getElementById('moodsWrap');
 MOODS.forEach(m=>{const c=document.createElement('div');c.className='mood-card';c.dataset.id=m.id;c.innerHTML=`<span class="mood-emoji">${m.emoji}</span><span class="mood-name">${m.label}</span><span class="mood-tag">${m.tag}</span>`;c.addEventListener('click',()=>{S.selectedMood=m.id;document.querySelectorAll('.mood-card').forEach(x=>{x.classList.remove('active');x.style.background='';x.style.color='';const chk=x.querySelector('.mood-check');if(chk)chk.remove();});c.classList.add('active');c.style.background=m.color;c.style.color='#fff';const chk=document.createElement('span');chk.className='mood-check';chk.textContent='✓';c.appendChild(chk);});moodsWrap.appendChild(c);});
@@ -618,26 +882,43 @@ async function fakeApiCall(mood){
 document.getElementById('findBtn').addEventListener('click',async()=>{
   if(!S.selectedMood){showToast('Pick a mood first 🎭');return;}
   if(!checkRate()){showPaywall();return;}
+  if(S.isFetching)return;
+  S.isFetching=true;
   const btn=document.getElementById('findBtn');btn.disabled=true;btn.classList.add('loading');btn.textContent='Crafting your perfect meals... 🍳';
+  searchBurst(btn);
+  S.meals=[];
   const res=document.getElementById('fridgeResults');
   res.innerHTML=`<div class="loading-state"><div style="font-size:2rem;margin-bottom:0.5rem">🔥</div>Our kitchen is on it<div class="loading-dots"><span>.</span><span>.</span><span>.</span></div></div>${'<div class="skeleton" style="height:80px"></div>'.repeat(3)}`;
   try{
-    const meals=await fakeApiCall(S.selectedMood);S.meals=meals;incrementRate();updateRateUI();
+    const meals=await fakeApiCall(S.selectedMood);
+    if(!Array.isArray(meals)||!meals.length)throw new Error('No meals returned');
+    S.meals=meals;incrementRate();updateRateUI();
     renderMealCards(meals,res);
     const actRow=document.createElement('div');actRow.className='action-row';
     actRow.innerHTML=`<button class="action-btn" id="groceryBtn">🛒 Grocery List</button><button class="action-btn" id="nutritionBtn">📊 Nutrition</button>`;
     res.appendChild(actRow);
     document.getElementById('groceryBtn').addEventListener('click',()=>showGroceryModal(meals));
     document.getElementById('nutritionBtn').addEventListener('click',()=>toggleNutrition(meals,res));
-  }catch(e){res.innerHTML=`<div class="empty-state"><span class="empty-state-emoji">🍳</span><p>Our chef is taking a break. Try again!</p><button class="retry-btn" onclick="document.getElementById('findBtn').click()">Retry 🔄</button></div>`;}
-  finally{btn.disabled=false;btn.classList.remove('loading');btn.innerHTML='Find My Meals 🍴';}
+  }catch(e){
+    console.error('Fridge search error:',e);
+    const retryEl=document.createElement('div');retryEl.className='empty-state';
+    retryEl.innerHTML=`<span class="empty-state-emoji">🍳</span><p>Our kitchen needs a moment.</p>`;
+    const retryBtn=document.createElement('button');retryBtn.className='retry-btn';retryBtn.textContent='Give it another go 🔄';
+    retryBtn.addEventListener('click',()=>{S.isFetching=false;document.getElementById('findBtn').click();});
+    retryEl.appendChild(retryBtn);res.innerHTML='';res.appendChild(retryEl);
+  }
+  finally{S.isFetching=false;btn.disabled=false;btn.classList.remove('loading');btn.innerHTML='Find My Meals 🍴';}
 });
 
 document.getElementById('inspireBtn').addEventListener('click',async()=>{
   if(!S.selectedMoodTab){showToast('Pick a mood first 🎭');return;}
   if(!checkRate()){showPaywall();return;}
+  if(S.isFetching)return;
+  S.isFetching=true;
   const btn=document.getElementById('inspireBtn');const cycleEmojis=['🍕','🌮','🍜','🍣','🥗','🍔'];let ci=0;
   btn.disabled=true;const iv=setInterval(()=>{btn.textContent=cycleEmojis[ci++%cycleEmojis.length]+' Loading...';},400);
+  searchBurst(btn);
+  S.moodMeals=[];
   const res=document.getElementById('moodResults');res.innerHTML='<div class="loading-state">Finding your perfect meal<div class="loading-dots"><span>.</span><span>.</span><span>.</span></div></div>';
   try{
     const sys='You are a food inspiration engine. Respond in raw JSON only. No markdown, no explanation, no code blocks.';
@@ -645,9 +926,17 @@ document.getElementById('inspireBtn').addEventListener('click',async()=>{
     const user='Give me 5 meal ideas for someone in a '+S.selectedMoodTab+' mood who wants '+S.selectedFoodType+' food. '+prefs+' Skill level: '+(S.prefs.skill||'Just Starting')+'. Servings needed: '+(S.prefs.servings||2)+'. For each return: name, emoji, calories (number), cookTime, prepTime, difficulty (Easy/Medium/Hard), description (max 15 words), funFact (max 20 words), moodMatch (0-100), ingredients (array of {item,amount,unit}), steps (array of {stepNumber,instruction,timerSeconds or null}), chefTip, servingSuggestion. Return as JSON array only.';
     let meals;
     try{meals=await callClaudeAPI(sys,user);}catch(e){meals=getMockMeals(S.selectedMoodTab).map(m=>({...m,description:m.chefTip?.slice(0,60)||'Delicious and satisfying.'}));}
+    if(!Array.isArray(meals)||!meals.length)throw new Error('No meals returned');
     S.moodMeals=meals;incrementRate();updateRateUI();renderMoodGrid(meals,res);
-  }catch(e){res.innerHTML=`<div class="empty-state"><span class="empty-state-emoji">😔</span><p>Something went wrong. Tap to retry!</p><button class="retry-btn" onclick="document.getElementById('inspireBtn').click()">Retry 🔄</button></div>`;}
-  finally{clearInterval(iv);btn.disabled=false;btn.textContent='Inspire Me! 🔥';}
+  }catch(e){
+    console.error('Mood search error:',e);
+    const retryEl=document.createElement('div');retryEl.className='empty-state';
+    retryEl.innerHTML=`<span class="empty-state-emoji">😔</span><p>Something went wrong. Tap to retry!</p>`;
+    const retryBtn=document.createElement('button');retryBtn.className='retry-btn';retryBtn.textContent='Retry 🔄';
+    retryBtn.addEventListener('click',()=>{S.isFetching=false;document.getElementById('inspireBtn').click();});
+    retryEl.appendChild(retryBtn);res.innerHTML='';res.appendChild(retryEl);
+  }
+  finally{S.isFetching=false;clearInterval(iv);btn.disabled=false;btn.textContent='Inspire Me! 🔥';}
 });
 
 function renderMealCards(meals,container){
@@ -656,10 +945,12 @@ function renderMealCards(meals,container){
   meals.forEach((m,i)=>{
     const c=document.createElement('div');c.className='meal-card';c.style.animationDelay=(i*0.08)+'s';
     const isFav=S.favorites.includes(m.name);
-    c.innerHTML=`<div class="meal-emoji-wrap" style="background:${bgColors[m.moodTag]||'#FFF3E0'}">${m.emoji}</div>
-      <div class="meal-info"><div class="meal-name">${m.name}${isFav?' ❤️':''}</div>
-      <div class="meal-badges"><span class="badge badge-cal">🔥 ${m.calories} kcal</span><span class="badge badge-time">⏱️ ${m.cookTime}</span><span class="badge badge-diff">${m.difficulty}</span></div>
-      <div class="meal-ing"><span class="meal-have">✅ ${(m.matchedIngredients||[]).slice(0,2).join(', ')||'Ready to make'}</span>${m.extraIngredients?.length?`<br><span class="meal-need">🛒 Need: ${m.extraIngredients.slice(0,2).join(', ')}</span>`:''}</div></div>`;
+    const haveTxt=escapeHtml((m.matchedIngredients||[]).slice(0,2).join(', '))||'Ready to make';
+    const needTxt=m.extraIngredients?.length?`<br><span class="meal-need">🛒 Need: ${escapeHtml(m.extraIngredients.slice(0,2).join(', '))}</span>`:'';
+    c.innerHTML=`<div class="meal-emoji-wrap" style="background:${bgColors[m.moodTag]||'#FFF3E0'}">${escapeHtml(m.emoji||'🍽️')}</div>
+      <div class="meal-info"><div class="meal-name">${escapeHtml(m.name)}${isFav?' ❤️':''}</div>
+      <div class="meal-badges"><span class="badge badge-cal">🔥 ${Number(m.calories)||0} kcal</span><span class="badge badge-time">⏱️ ${escapeHtml(m.cookTime||'?')}</span><span class="badge badge-diff">${escapeHtml(m.difficulty||'Easy')}</span></div>
+      <div class="meal-ing"><span class="meal-have">✅ ${haveTxt}</span>${needTxt}</div></div>`;
     c.addEventListener('click',()=>openSheet(m));container.appendChild(c);
   });
 }
@@ -669,12 +960,12 @@ function renderMoodGrid(meals,container){
   meals.forEach((m,i)=>{
     const c=document.createElement('div');c.className='mood-result-card';c.style.animationDelay=(i*0.08)+'s';
     const isFav=S.favorites.includes(m.name);
-    c.innerHTML=`<span class="mood-card-emoji">${m.emoji}</span><div class="mood-card-name">${m.name}${isFav?' ❤️':''}</div>
-      <div class="mood-card-desc">${m.description||''}</div>
-      <div class="meal-badges" style="justify-content:center"><span class="badge badge-cal">🔥 ${m.calories}</span><span class="badge badge-time">⏱️ ${m.cookTime}</span></div>
+    c.innerHTML=`<span class="mood-card-emoji">${escapeHtml(m.emoji||'🍽️')}</span><div class="mood-card-name">${escapeHtml(m.name)}${isFav?' ❤️':''}</div>
+      <div class="mood-card-desc">${escapeHtml(m.description||'')}</div>
+      <div class="meal-badges" style="justify-content:center"><span class="badge badge-cal">🔥 ${Number(m.calories)||0}</span><span class="badge badge-time">⏱️ ${escapeHtml(m.cookTime||'?')}</span></div>
       <div class="vibe-bar-wrap"><div class="vibe-bar" style="width:${m.moodMatch||85}%"></div></div>
       <div class="vibe-label">${m.moodMatch||85}% your vibe 🎯</div>
-      <div class="fun-fact">💡 ${m.funFact||''}</div>`;
+      <div class="fun-fact">💡 ${escapeHtml(m.funFact||'')}</div>`;
     c.addEventListener('click',()=>openSheet(m));grid.appendChild(c);
   });
   container.appendChild(grid);
@@ -682,17 +973,17 @@ function renderMoodGrid(meals,container){
 
 function openSheet(recipe){
   S.activeRecipe=recipe;
-  document.getElementById('sheetEmoji').textContent=recipe.emoji;
-  document.getElementById('sheetTitle').textContent=recipe.name;
-  document.getElementById('sheetBadges').innerHTML=`<span class="badge badge-cal">🔥 ${recipe.calories} kcal</span><span class="badge badge-time">⏱️ Prep: ${recipe.prepTime||'?'}</span><span class="badge badge-time">🔥 Cook: ${recipe.cookTime}</span><span class="badge badge-diff">${recipe.difficulty}</span>`;
+  document.getElementById('sheetEmoji').textContent=recipe.emoji||'🍽️';
+  document.getElementById('sheetTitle').textContent=recipe.name||'Untitled';
+  document.getElementById('sheetBadges').innerHTML=`<span class="badge badge-cal">🔥 ${Number(recipe.calories)||0} kcal</span><span class="badge badge-time">⏱️ Prep: ${escapeHtml(recipe.prepTime||'?')}</span><span class="badge badge-time">🔥 Cook: ${escapeHtml(recipe.cookTime||'?')}</span><span class="badge badge-diff">${escapeHtml(recipe.difficulty||'Easy')}</span>`;
   const favBtn=document.getElementById('sheetFavBtn');const isFav=S.favorites.includes(recipe.name);
   favBtn.textContent=isFav?'❤️ Saved':'🤍 Save';favBtn.classList.toggle('active',isFav);
   favBtn.onclick=()=>{if(S.favorites.includes(recipe.name)){S.favorites=S.favorites.filter(f=>f!==recipe.name);favBtn.textContent='🤍 Save';favBtn.classList.remove('active');}else{S.favorites.push(recipe.name);favBtn.textContent='❤️ Saved';favBtn.classList.add('active');}localStorage.setItem('cio_favs',JSON.stringify(S.favorites));};
-  document.getElementById('sheetShareBtn').onclick=()=>{const txt=`Check out ${recipe.name} ${recipe.emoji} on CraveItOut!\n${recipe.calories} kcal | ${recipe.cookTime}\nYour Fridge. Your Mood. Your Meal.`;if(navigator.share)navigator.share({title:'CraveItOut',text:txt});else{navigator.clipboard.writeText(txt);showToast('Copied! 📋');}};
+  document.getElementById('sheetShareBtn').onclick=()=>{const txt=`Check out ${recipe.name} ${recipe.emoji||''} on CraveItOut!\n${recipe.calories||0} kcal | ${recipe.cookTime||''}\nYour Fridge. Your Mood. Your Meal.`;if(navigator.share)navigator.share({title:'CraveItOut',text:txt});else{navigator.clipboard.writeText(txt);showToast('Copied! 📋');}};
   const ingList=document.getElementById('sheetIngs');ingList.innerHTML='';
-  (recipe.ingredients||[]).forEach(ing=>{const li=document.createElement('li');li.className='ing-check-item';li.innerHTML=`<input type="checkbox" aria-label="${ing.item}"><span><b>${ing.amount} ${ing.unit}</b> ${ing.item}</span>`;li.addEventListener('click',e=>{const cb=li.querySelector('input');if(e.target!==cb)cb.checked=!cb.checked;li.classList.toggle('checked',cb.checked);});ingList.appendChild(li);});
+  (recipe.ingredients||[]).forEach(ing=>{const li=document.createElement('li');li.className='ing-check-item';const cb=document.createElement('input');cb.type='checkbox';cb.setAttribute('aria-label',ing.item||'');const sp=document.createElement('span');sp.innerHTML=`<b>${escapeHtml(String(ing.amount||''))} ${escapeHtml(ing.unit||'')}</b> ${escapeHtml(ing.item||'')}`;li.appendChild(cb);li.appendChild(sp);li.addEventListener('click',e=>{if(e.target!==cb)cb.checked=!cb.checked;li.classList.toggle('checked',cb.checked);});ingList.appendChild(li);});
   const stepsList=document.getElementById('sheetSteps');stepsList.innerHTML='';
-  (recipe.steps||[]).forEach((step,i)=>{const li=document.createElement('li');li.className='step-item';li.innerHTML=`<span class="step-num">${i+1}</span><div class="step-text">${step.instruction}${step.timerSeconds?`<br><button class="timer-btn" data-sec="${step.timerSeconds}">⏱️ Start ${formatTime(step.timerSeconds)}</button>`:''}</div>`;if(step.timerSeconds){const tb=li.querySelector('.timer-btn');tb.addEventListener('click',()=>startStepTimer(tb,step.timerSeconds));}stepsList.appendChild(li);});
+  (recipe.steps||[]).forEach((step,i)=>{const li=document.createElement('li');li.className='step-item';const numSpan=document.createElement('span');numSpan.className='step-num';numSpan.textContent=i+1;const div=document.createElement('div');div.className='step-text';div.textContent=step.instruction||'';if(step.timerSeconds){const tb=document.createElement('button');tb.className='timer-btn';tb.dataset.sec=step.timerSeconds;tb.textContent=`⏱️ Start ${formatTime(step.timerSeconds)}`;tb.addEventListener('click',()=>startStepTimer(tb,step.timerSeconds));div.appendChild(document.createElement('br'));div.appendChild(tb);}li.appendChild(numSpan);li.appendChild(div);stepsList.appendChild(li);});
   document.getElementById('sheetTip').textContent=recipe.chefTip||'Cook with love!';
   document.getElementById('sheetServe').textContent=recipe.servingSuggestion||'Enjoy!';
   document.getElementById('recipeOverlay').classList.remove('hidden');
@@ -712,11 +1003,17 @@ document.getElementById('startCookBtn').addEventListener('click',()=>{
   if(navigator.wakeLock)try{navigator.wakeLock.request('screen')}catch(e){}
 });
 
-function updateCookMode(){
+function updateCookMode(dir){
   const step=S.cookSteps[S.cookIdx];const total=S.cookSteps.length;
   document.getElementById('cookStepLabel').textContent=`Step ${S.cookIdx+1} of ${total}`;
   document.getElementById('cookProgress').style.width=((S.cookIdx+1)/total*100)+'%';
-  document.getElementById('cookStepText').textContent=step.instruction;
+  const textEl=document.getElementById('cookStepText');
+  textEl.textContent=step.instruction||'';
+  if(dir){
+    textEl.classList.remove('step-anim-in','step-anim-back');
+    void textEl.offsetWidth;
+    textEl.classList.add(dir==='next'?'step-anim-in':'step-anim-back');
+  }
   document.getElementById('cookPrev').disabled=S.cookIdx===0;
   document.getElementById('cookNext').textContent=S.cookIdx===total-1?'Done! 🎉':'Next →';
   if(S.cookTimerInterval)clearInterval(S.cookTimerInterval);
@@ -724,15 +1021,20 @@ function updateCookMode(){
   if(step.timerSeconds){let t=step.timerSeconds;timerEl.style.display='block';timerEl.textContent=formatTime(t);S.cookTimerInterval=setInterval(()=>{t--;timerEl.textContent=formatTime(t);if(t<=0){clearInterval(S.cookTimerInterval);timerEl.textContent='✓ Done!';}},1000);}
 }
 
-document.getElementById('cookNext').addEventListener('click',()=>{if(S.cookIdx<S.cookSteps.length-1){S.cookIdx++;updateCookMode();}else{document.getElementById('cookOverlay').classList.add('hidden');launchConfetti();}});
-document.getElementById('cookPrev').addEventListener('click',()=>{if(S.cookIdx>0){S.cookIdx--;updateCookMode();}});
+document.getElementById('cookNext').addEventListener('click',()=>{if(S.cookIdx<S.cookSteps.length-1){S.cookIdx++;updateCookMode('next');}else{if(S.cookTimerInterval)clearInterval(S.cookTimerInterval);document.getElementById('cookOverlay').classList.add('hidden');launchConfetti();}});
+document.getElementById('cookPrev').addEventListener('click',()=>{if(S.cookIdx>0){S.cookIdx--;updateCookMode('back');}});
 document.getElementById('cookExit').addEventListener('click',()=>{if(S.cookTimerInterval)clearInterval(S.cookTimerInterval);document.getElementById('cookOverlay').classList.add('hidden');});
 
 function launchConfetti(){
   const wrap=document.getElementById('confettiWrap');wrap.classList.remove('hidden');
   const colors=['#FF3008','#FF8C00','#FFD600','#FF6B6B','#00C853'];
   for(let i=0;i<40;i++){const p=document.createElement('div');p.className='confetti-piece';const angle=Math.random()*360;const dist=80+Math.random()*150;p.style.cssText=`left:50%;top:50%;background:${colors[i%colors.length]};--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;animation-delay:${Math.random()*0.3}s;border-radius:${Math.random()>0.5?'50%':'2px'}`;wrap.appendChild(p);}
-  setTimeout(()=>{wrap.classList.add('hidden');wrap.innerHTML='';},1200);showToast('Amazing! You cooked it! 🎉');
+  setTimeout(()=>{wrap.classList.add('hidden');wrap.innerHTML='';},1200);
+  const q=COOKING_QUOTES[Math.floor(Math.random()*COOKING_QUOTES.length)];
+  document.getElementById('quoteDishEmoji').textContent=S.activeRecipe?.emoji||'🍽️';
+  document.getElementById('quoteText').textContent='\u201c'+q.text+'\u201d';
+  document.getElementById('quoteAuthor').textContent='\u2014 '+q.author;
+  setTimeout(()=>document.getElementById('quoteOverlay').classList.remove('hidden'),900);
 }
 
 function showGroceryModal(meals){
@@ -773,9 +1075,13 @@ function updateBuyerSelect(){const s=document.getElementById('buyerSelect');s.in
 function renderSplitBetween(){const sb=document.getElementById('splitBetween');sb.innerHTML='';SPLITS.people.forEach((p,i)=>{const c=document.createElement('span');c.className='pref-chip active';c.dataset.person=p;c.style.cssText=`background:${PERSON_COLORS[i%PERSON_COLORS.length]};border-color:${PERSON_COLORS[i%PERSON_COLORS.length]};color:#fff`;c.textContent=p;c.addEventListener('click',()=>c.classList.toggle('active'));sb.appendChild(c);});}
 
 document.getElementById('addItemBtn').addEventListener('click',()=>{
-  const name=document.getElementById('itemNameInput').value.trim();const price=parseFloat(document.getElementById('itemPriceInput').value);const buyer=document.getElementById('buyerSelect').value;const splitWith=[...document.querySelectorAll('#splitBetween .active')].map(c=>c.dataset.person);
-  if(!name||isNaN(price)||!buyer||!splitWith.length)return;
-  SPLITS.items.push({name,price,buyer,splitWith});document.getElementById('itemNameInput').value='';document.getElementById('itemPriceInput').value='';renderItemsList();
+  const name=document.getElementById('itemNameInput').value.trim();
+  const rawPrice=document.getElementById('itemPriceInput').value;
+  const price=parseFloat(rawPrice);
+  const buyer=document.getElementById('buyerSelect').value;
+  const splitWith=[...document.querySelectorAll('#splitBetween .active')].map(c=>c.dataset.person);
+  if(!name||isNaN(price)||price<=0||price>100000||!buyer||!splitWith.length){showToast('Please fill all fields correctly!');return;}
+  SPLITS.items.push({name,price:Math.round(price*100)/100,buyer,splitWith});document.getElementById('itemNameInput').value='';document.getElementById('itemPriceInput').value='';renderItemsList();
 });
 
 function renderItemsList(){
@@ -788,7 +1094,7 @@ function renderItemsList(){
 document.getElementById('calcBtn').addEventListener('click',()=>{
   if(SPLITS.people.length<2||!SPLITS.items.length){showToast('Add people and items first!');return;}
   const balances={};SPLITS.people.forEach(p=>balances[p]=0);
-  SPLITS.items.forEach(item=>{balances[item.buyer]+=item.price;const share=item.price/item.splitWith.length;item.splitWith.forEach(p=>balances[p]-=share);});
+  SPLITS.items.forEach(item=>{balances[item.buyer]+=item.price;if(!item.splitWith.length)return;const share=item.price/item.splitWith.length;item.splitWith.forEach(p=>balances[p]-=share);});
   const settlements=[];const pos=Object.entries(balances).filter(([,v])=>v>0.01).sort((a,b)=>b[1]-a[1]);const neg=Object.entries(balances).filter(([,v])=>v<-0.01).sort((a,b)=>a[1]-b[1]);
   let pi=0,ni=0;while(pi<pos.length&&ni<neg.length){const [creditor,credit]=pos[pi];const [debtor,debt]=neg[ni];const amount=Math.min(credit,Math.abs(debt));settlements.push({from:debtor,to:creditor,amount});pos[pi][1]-=amount;neg[ni][1]+=amount;if(Math.abs(pos[pi][1])<0.01)pi++;if(Math.abs(neg[ni][1])<0.01)ni++;}
   const res=document.getElementById('splitResults');res.innerHTML='';
@@ -810,7 +1116,55 @@ document.getElementById('savePrefsBtn').addEventListener('click',()=>{S.prefs={d
 document.getElementById('clearDataBtn').addEventListener('click',()=>{if(confirm('Clear all your data?')){localStorage.clear();showToast('Data cleared 🗑️');}});
 
 function escapeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');}
-function showToast(msg){const t=document.createElement('div');t.style.cssText='position:fixed;bottom:5rem;left:50%;transform:translateX(-50%);background:#1A0A00;color:#FFFBF2;padding:0.7rem 1.4rem;border-radius:var(--pill);font-weight:700;font-size:0.88rem;z-index:999;white-space:nowrap';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2500);}
+function showToast(msg){const existing=document.querySelector('.cio-toast');if(existing)existing.remove();const t=document.createElement('div');t.className='cio-toast';t.style.cssText='position:fixed;bottom:5rem;left:50%;transform:translateX(-50%);background:#1A0A00;color:#FFFBF2;padding:0.7rem 1.4rem;border-radius:var(--pill);font-weight:700;font-size:0.88rem;z-index:999;white-space:nowrap';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2500);}
+
+function searchBurst(btn){
+  const rect=btn.getBoundingClientRect();const cx=rect.left+rect.width/2;const cy=rect.top+rect.height/2;
+  const food=['🔥','🍳','✨','⚡','🌟','🍴'];
+  for(let i=0;i<6;i++){
+    const p=document.createElement('span');
+    const angle=(i/6)*Math.PI*2+(Math.random()*0.5);const dist=55+Math.random()*35;
+    p.style.cssText=`position:fixed;left:${cx}px;top:${cy}px;font-size:${0.9+Math.random()*0.5}rem;pointer-events:none;z-index:1001;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;animation:searchBurstFly 0.55s ease-out forwards`;
+    p.textContent=food[i%food.length];document.body.appendChild(p);setTimeout(()=>p.remove(),600);
+  }
+}
+
+function renderCookbook(){
+  const container=document.getElementById('cbContent');if(!container)return;container.innerHTML='';
+  const banner=document.createElement('div');banner.className='cb-premium-banner';
+  banner.innerHTML=`<span class="cb-premium-icon">🔒</span><div class="cb-premium-text"><div class="cb-premium-label">Premium Section</div><div class="cb-premium-desc">150 world dishes locked — unlock with Premium</div></div><span class="cb-premium-lock">✨</span>`;
+  container.appendChild(banner);
+  const levels=[
+    {key:'beginner',label:'Beginner',emoji:'🥚',color:'#00C853',desc:'Simple techniques, big flavours from every corner of the globe'},
+    {key:'intermediate',label:'Intermediate',emoji:'🍳',color:'#FF8C00',desc:'Level up — bold recipes from 30+ countries'},
+    {key:'hard',label:'Master Class',emoji:'🔥',color:'#FF3008',desc:'Restaurant-grade techniques for the fearless cook'}
+  ];
+  levels.forEach(level=>{
+    const section=document.createElement('div');section.className=`cb-level cb-level-${level.key}`;
+    const header=document.createElement('div');header.className='cb-level-header';
+    header.innerHTML=`<span class="cb-level-title" style="color:${level.color}">${level.emoji} ${level.label}</span><span class="cb-level-count">50 dishes</span>`;
+    section.appendChild(header);
+    const sub=document.createElement('p');sub.className='cb-level-sub';sub.textContent=level.desc;section.appendChild(sub);
+    const lockWrap=document.createElement('div');lockWrap.className='cb-lock-wrap';
+    const scroll=document.createElement('div');scroll.className='cb-scroll';
+    COOKBOOK[level.key].slice(0,4).forEach(dish=>{
+      const card=document.createElement('div');card.className='cb-dish-card';
+      card.innerHTML=`<span class="cb-dish-emoji">${escapeHtml(dish.e)}</span><div class="cb-dish-name">${escapeHtml(dish.n)}</div><div class="cb-dish-origin">${escapeHtml(dish.o)}</div><div class="cb-dish-meta"><span class="cb-dish-time">⏱️ ${escapeHtml(dish.t)}</span><span class="cb-dish-cal">🔥 ${dish.c}</span></div>`;
+      card.addEventListener('click',()=>showPaywall());scroll.appendChild(card);
+    });
+    lockWrap.appendChild(scroll);
+    const fade=document.createElement('div');fade.className='cb-lock-fade';lockWrap.appendChild(fade);
+    section.appendChild(lockWrap);
+    const unlock=document.createElement('div');unlock.className='cb-unlock-card';
+    unlock.innerHTML=`<span class="cb-unlock-icon">🔒</span><div class="cb-unlock-title">+46 more ${level.label} dishes</div><div class="cb-unlock-sub">From Japan, Mexico, Ethiopia, India, France and 35+ more countries — waiting for you inside Premium.</div><button class="cb-unlock-btn">Unlock Premium 🚀</button>`;
+    unlock.querySelector('.cb-unlock-btn').addEventListener('click',()=>showPaywall());
+    section.appendChild(unlock);container.appendChild(section);
+  });
+}
+
+document.getElementById('quoteCloseBtn').addEventListener('click',()=>document.getElementById('quoteOverlay').classList.add('hidden'));
+document.getElementById('quoteOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('quoteOverlay'))document.getElementById('quoteOverlay').classList.add('hidden');});
+
 document.getElementById('paywallLaterBtn').addEventListener('click',()=>document.getElementById('paywallOverlay').classList.add('hidden'));
 document.getElementById('paywallUpgradeBtn').addEventListener('click',()=>{
   // TODO: connect to payment provider (e.g. Stripe)
@@ -818,7 +1172,11 @@ document.getElementById('paywallUpgradeBtn').addEventListener('click',()=>{
 });
 document.getElementById('paywallOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('paywallOverlay'))document.getElementById('paywallOverlay').classList.add('hidden');});
 
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){['recipeOverlay','cookOverlay','prefOverlay','groceryOverlay','paywallOverlay'].forEach(id=>document.getElementById(id).classList.add('hidden'));}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){['recipeOverlay','cookOverlay','prefOverlay','groceryOverlay','paywallOverlay','quoteOverlay'].forEach(id=>document.getElementById(id).classList.add('hidden'));}});
+
+// Render cookbook on first open
+let cbRendered=false;
+document.querySelectorAll('.tab-btn').forEach(btn=>{if(btn.dataset.tab==='cookbook')btn.addEventListener('click',()=>{if(!cbRendered){renderCookbook();cbRendered=true;}});});
 </script>
 </body>
 </html>
