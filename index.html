@@ -604,7 +604,8 @@ const S={
   prefs:JSON.parse(localStorage.getItem('cio_prefs')||'{"diet":[],"skill":"Just Starting","calories":2000,"servings":2}'),
   cookSteps:[],cookIdx:0,cookTimerInterval:null,
   dailyCalls:JSON.parse(localStorage.getItem('cio_rate')||'{"date":"","count":0}'),
-  MAX_CALLS:8,darkMode:localStorage.getItem('cio_dark')==='1'
+  MAX_CALLS:8, // 8 free searches/day — premium users get unlimited
+  darkMode:localStorage.getItem('cio_dark')==='1'
 };
 
 const EMOJIS=['🍔','🍕','🌮','🍜','🍣','🥗','🍰','🌶️','🍋','🥚','🧀','🍗'];
